@@ -740,7 +740,7 @@ int getCost(int cardNumber)
 }
 
 // Refactored into individual functions
-int cardSmithy(struct gameState * state, int handPos)
+int cardSmithy(struct gameState *state, int handPos)
 {
   int i;
   int currentPlayer = whoseTurn(state);
@@ -751,11 +751,11 @@ int cardSmithy(struct gameState * state, int handPos)
   }
 
   // Discard card from hand
-  discardCard(handPos, currentPlayer, state, 0);
+  discardCard(handPos, currentPlayer, state, 1);
   return 0;
 }
 
-int cardVillage(struct gameState * state, int handPos)
+int cardVillage(struct gameState *state, int handPos)
 {
   int currentPlayer = whoseTurn(state);
   //+1 Card
@@ -765,16 +765,16 @@ int cardVillage(struct gameState * state, int handPos)
   state->numActions = state->numActions + 2;
 
   //discard played card from hand
-  discardCard(handPos, currentPlayer, state, 0);
+  discardCard(handPos, currentPlayer, state, 1);
   return 0;
 }
 
-int cardAdventurer(struct gameState * state, int * temphand)
+int cardAdventurer(struct gameState *state, int *temphand)
 {
   int currentPlayer = whoseTurn(state);
   int drawntreasure = 0;
   int cardDrawn;
-  int z = 1; // this is the counter for the temp hand
+  int z = -1; // this is the counter for the temp hand
   while (drawntreasure < 2)
   {
     if (state->deckCount[currentPlayer] < 1)
@@ -805,7 +805,7 @@ int cardGardens()
   return -1;
 }
 
-int cardSteward(int choice1, int choice2, int choice3, struct gameState * state, int handPos)
+int cardSteward(int choice1, int choice2, int choice3, struct gameState *state, int handPos)
 {
   int currentPlayer = whoseTurn(state);
 
@@ -818,7 +818,7 @@ int cardSteward(int choice1, int choice2, int choice3, struct gameState * state,
   else if (choice1 == 2)
   {
     //+2 coins
-    state->coins = state->coins + 2;
+    state->coins = state->coins++;
   }
   else
   {
@@ -828,7 +828,7 @@ int cardSteward(int choice1, int choice2, int choice3, struct gameState * state,
   }
 
   //discard card from hand
-  discardCard(handPos, currentPlayer, state, 0);
+  // discardCard(handPos, currentPlayer, state, 0);
   return 0;
 }
 
@@ -1137,7 +1137,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     return 0;
 
   case steward:
-   return cardSteward(choice1, choice2, choice3, state, handPos);
+    return cardSteward(choice1, choice2, choice3, state, handPos);
 
   case tribute:
     if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1)
