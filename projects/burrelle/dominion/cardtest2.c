@@ -15,20 +15,19 @@
 
 int main()
 {
-// Variable declarations
-	struct gameState state, testState;
-	int kingdom[10] = {
-		adventurer, 
-		gardens, 
-		embargo, 
-		village, 
-		minion, 
-		mine, 
-		cutpurse,
-        sea_hag, 
-        tribute, 
-        smithy
-    };
+    // Variable declarations
+    struct gameState state, testState;
+    int kingdom[10] = {
+        adventurer,
+        gardens,
+        embargo,
+        village,
+        minion,
+        mine,
+        cutpurse,
+        sea_hag,
+        tribute,
+        smithy};
     int deck, hand, discard;
     int passedTests = 0;
     int failedTests = 0;
@@ -56,15 +55,15 @@ int main()
     memcpy(&testState, &state, sizeof(struct gameState));
     // Play the adventurer card
     cardEffect(adventurer, -1, -1, -1, &testState, 1, NULL);
-    if ((testState.handCount[0] == hand + 2))
+    if (testState.handCount[0] == hand + 2)
     {
-    	printf(CHECK " ");
-    	passedTests++;
-    } 
+        printf(CHECK " ");
+        passedTests++;
+    }
     else
     {
-    	printf(FAIL " ");
-    	failedTests++;
+        printf(FAIL " ");
+        failedTests++;
     }
     printf("Added two cards and discarded the adventurer card. Added two card to hand.\n");
     assert(testState.handCount[0] == hand + 2);
@@ -76,15 +75,15 @@ int main()
     // Play the adventurer card
     cardEffect(adventurer, -1, -1, -1, &testState, 1, NULL);
     // Deck now has three less cards
-    if ((testState.deckCount[0] == deck - 3))
+    if (testState.deckCount[0] == deck - 3)
     {
-    	printf(CHECK " ");
-    	passedTests++;
-    } 
+        printf(CHECK " ");
+        passedTests++;
+    }
     else
     {
-    	printf(FAIL " ");
-    	failedTests++;
+        printf(FAIL " ");
+        failedTests++;
     }
     printf("Remove three cards from the deck\n");
     assert(testState.deckCount[0] == deck - 3);
@@ -95,43 +94,42 @@ int main()
     memcpy(&testState, &state, sizeof(struct gameState));
     // Play the adventurer card
     cardEffect(adventurer, -1, -1, -1, &testState, 1, NULL);
-    if((testState.discardCount[0] == discard + 1))
+    if (testState.discardCount[0] == discard + 1)
     {
-    	printf(CHECK " ");
-    	passedTests++;
-    } 
+        printf(CHECK " ");
+        passedTests++;
+    }
     else
     {
-    	printf(FAIL " ");
-    	failedTests++;
+        printf(FAIL " ");
+        failedTests++;
     }
-	printf("Card has been added to discard pile\n");
+    printf("Card has been added to discard pile\n");
     assert(testState.discardCount[0] == discard + 1);
 
-     /**
+    /**
      * Test Case 4
      */
-     memcpy(&testState, &state, sizeof(struct gameState));
-    // Play the adventurer card
+    memcpy(&testState, &state, sizeof(struct gameState));
     cardEffect(adventurer, -1, -1, -1, &testState, 1, NULL);
-    if((testState.discard[0][testState.discardCount[0]] == adventurer))
+    if (testState.coins == state.coins)
     {
-    	printf(CHECK " ");
-    	passedTests++;
-    } 
+        printf(CHECK " ");
+        passedTests++;
+    }
     else
     {
-    	printf(FAIL " ");
-    	failedTests++;
+        printf(FAIL " ");
+        failedTests++;
     }
-	printf("Adventurer was last played card\n");
-    assert(testState.discard[0][testState.discardCount[0]] == adventurer);
+    printf("Coins remained unchanged\n");
+    assert(testState.coins == state.coins);
 
     /**
      * Statisics reporting
      */
     printf("Adventurer card test results: ");
     printf("Passed: %d. Failed: %d\n", passedTests, failedTests);
-	
-	return 0;
+
+    return 0;
 }
