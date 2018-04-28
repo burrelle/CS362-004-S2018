@@ -58,7 +58,7 @@ int main()
     cardEffect(smithy, -1, -1, -1, &testState, 1, NULL);
 
     // +3 - 1 = +2 in hand.
-    if ((testState.handCount[0] == hand + 2))
+    if (testState.handCount[0] == hand + 2)
     {
     	printf(CHECK " ");
     	passedTests++;
@@ -78,7 +78,7 @@ int main()
     // Play the smithy card
     cardEffect(smithy, -1, -1, -1, &testState, 1, NULL);
     // Deck now has three less cards
-    if ((testState.deckCount[0] == deck - 3))
+    if (testState.deckCount[0] == deck - 3)
     {
     	printf(CHECK " ");
     	passedTests++;
@@ -97,7 +97,7 @@ int main()
     memcpy(&testState, &state, sizeof(struct gameState));
     // Play the smithy card
     cardEffect(smithy, -1, -1, -1, &testState, 1, NULL);
-    if((testState.playedCardCount == played + 1))
+    if(testState.playedCardCount == played + 1)
     {
     	printf(CHECK " ");
     	passedTests++;
@@ -108,7 +108,8 @@ int main()
     	failedTests++;
     }
 	printf("Card has been added to played pile\n");
-    assert(testState.playedCardCount == played + 1);
+    // Removed assertion because introduced bugs from assignment 2.
+    // assert(testState.playedCardCount == played + 1);
 
     /**
      * Test Case 4
@@ -116,7 +117,7 @@ int main()
      memcpy(&testState, &state, sizeof(struct gameState));
     // Play the smithy card
     cardEffect(smithy, -1, -1, -1, &testState, 1, NULL);
-    if((testState.playedCards[testState.playedCardCount -1] == smithy))
+    if(testState.playedCards[testState.playedCardCount -1] == smithy)
     {
     	printf(CHECK " ");
     	passedTests++;
@@ -127,7 +128,8 @@ int main()
     	failedTests++;
     }
 	printf("Smithy was last played card\n");
-    assert(testState.playedCards[testState.playedCardCount -1] == smithy);
+    // Removed assertion because introduced bugs from assignment 2.
+    // assert(testState.playedCards[testState.playedCardCount -1] == smithy);
 
     /**
      * Statisics reporting

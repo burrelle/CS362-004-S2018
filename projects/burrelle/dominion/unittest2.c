@@ -51,8 +51,8 @@ int main()
       tribute,
       smithy};
 
-  int deck[10];
-  int passedTests, failedTests;
+  int passedTests = 0;
+  int failedTests = 0;
 
   printf("Testing the shuffle function: \n");
 

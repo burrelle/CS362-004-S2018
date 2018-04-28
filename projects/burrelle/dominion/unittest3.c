@@ -413,6 +413,19 @@ int main()
     printf("Treasure Map = 4\n");
     assert(treasure_mapReturn == 4);
 
+    int failureReturn = getCost("failure");
+    if (failureReturn == -1)
+    {
+        printf(CHECK " ");
+        passedTests++;
+    }
+    else
+    {
+        printf(FAIL " ");
+        failedTests++;
+    }
+    printf("Failure = -1\n");
+    assert(failureReturn == -1);
     /**
      * Statisics reporting
      */

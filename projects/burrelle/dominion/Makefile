@@ -57,23 +57,23 @@ unittest3: dominion.o unittest3.c
 unittest4: dominion.o unittest4.c
 	gcc -o unittest4 unittest4.c -g dominion.o rngs.o $(CFLAGS)
 
-testResults: unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
-	./unittest1 >> testResults
-	gcov dominion.c >> testResults
-	./unittest2 >> testResults
-	gcov dominion.c >> testResults
-	./unittest3 >> testResults
-	gcov dominion.c >> testResults
-	./unittest4 >> testResults
-	gcov dominion.c >> testResults
-	./cardtest1 >> testResults
-	gcov dominion.c >> testResults
-	./cardtest2 >> testResults
-	gcov dominion.c >> testResults
-	./cardtest3 >> testResults
-	gcov dominion.c >> testResults
-	./cardtest4 >> testResults
-	gcov dominion.c >> testResults
+unittestresults.out: unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
+	./unittest1 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	./unittest2 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	./unittest3 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	./unittest4 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	./cardtest1 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	./cardtest2 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	./cardtest3 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	./cardtest4 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
 
 all: playdom player 
 
