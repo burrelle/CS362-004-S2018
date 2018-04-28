@@ -25,17 +25,16 @@ int compare(const int *a, const int *b);
 
 Bool compareTwoDecks(struct gameState *G)
 {
-	int i;
-	for (i = 0; i < G->deckCount[0]; i++)
-	{
-		if (G->deck[1][i] != G->deck[0][i])
-		{
-			return false;
-		}
-	}
-	return true;
+  int i;
+  for (i = 0; i < G->deckCount[0]; i++)
+  {
+    if (G->deck[1][i] != G->deck[0][i])
+    {
+      return false;
+    }
+  }
+  return true;
 }
-
 
 int main()
 {
@@ -100,13 +99,13 @@ int main()
   printf("The cards should be shuffled independently\n");
   assert(compareTwoDecks(&state) != true);
 
-/**
+  /**
  * Unit test 3
  * The shuffled cards have different cards
  */
-  qsort ((void*)(state.deck[0]), state.deckCount[0], sizeof(int), compare);
-  qsort ((void*)(state.deck[1]), state.deckCount[1], sizeof(int), compare);
-  
+  qsort((void *)(state.deck[0]), state.deckCount[0], sizeof(int), compare);
+  qsort((void *)(state.deck[1]), state.deckCount[1], sizeof(int), compare);
+
   if (compareTwoDecks(&state) != false)
   {
     printf(CHECK " ");
@@ -119,7 +118,12 @@ int main()
   }
   printf("After sorting the cards should be the same\n");
   assert(compareTwoDecks(&state) != false);
-  
+
+  /**
+     * Statisics reporting
+     */
+  printf("Shuffle function unit test results: ");
+  printf("Passed: %d. Failed: %d\n", passedTests, failedTests);
 
   return 0;
 }
