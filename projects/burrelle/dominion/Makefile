@@ -54,7 +54,29 @@ unittest2: dominion.o unittest2.c
 unittest3: dominion.o unittest3.c
 	gcc -o unittest3 unittest3.c -g dominion.o rngs.o $(CFLAGS)
 
+unittest4: dominion.o unittest4.c
+	gcc -o unittest4 unittest4.c -g dominion.o rngs.o $(CFLAGS)
+
+testResults: unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
+	./unittest1 >> testResults
+	gcov dominion.c >> testResults
+	./unittest2 >> testResults
+	gcov dominion.c >> testResults
+	./unittest3 >> testResults
+	gcov dominion.c >> testResults
+	./unittest4 >> testResults
+	gcov dominion.c >> testResults
+	./cardtest1 >> testResults
+	gcov dominion.c >> testResults
+	./cardtest2 >> testResults
+	gcov dominion.c >> testResults
+	./cardtest3 >> testResults
+	gcov dominion.c >> testResults
+	./cardtest4 >> testResults
+	gcov dominion.c >> testResults
+
 all: playdom player 
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe cardtest1 cardtest2 cardtest3 cardtest4 unittest1 unittest2 unittest3
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe cardtest1 cardtest2 cardtest3 cardtest4 unittest1 unittest2 unittest3 unittest4
+	rm -rf *.dSYM
