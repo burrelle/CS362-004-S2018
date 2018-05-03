@@ -5,16 +5,17 @@
 
 char inputChar()
 {
-  char randomChar; 
+  char randomChar;
   randomChar = (rand() % 127) + 32;
   return randomChar;
 }
 
 char *inputString()
 {
+  int i;
   char *randomString = (char *) malloc(6);
 
-  for (int i = 0; i < 5; ++i)
+  for (i = 0; i < 5; ++i)
   {
     randomString[i] = (rand() % 26) + 97;
   }
