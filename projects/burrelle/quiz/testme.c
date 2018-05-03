@@ -14,11 +14,10 @@ char *inputString()
 {
   char *randomString = (char *) malloc(6);
 
-  randomString[0] = (rand() % 26) + 97;
-  randomString[1] = (rand() % 26) + 97;
-  randomString[2] = (rand() % 26) + 97;
-  randomString[3] = (rand() % 26) + 97;
-  randomString[4] = (rand() % 26) + 97;
+  for (int i = 0; i < 5; ++i)
+  {
+    randomString[i] = (rand() % 26) + 97;
+  }
   randomString[5] = '\0';
 
   return randomString;
