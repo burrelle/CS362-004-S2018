@@ -33,13 +33,24 @@ cardtest1: dominion.o smithy_test.c
 	gcc -o cardtest1 smithy_test.c -g dominion.o rngs.o $(CFLAGS)
 
 cardtest2: dominion.o adventurer_test.c
-	gcc -o cardtest2 adventurer_test.c -g dominion.o rngs.o $(CFLAGS)	
+	gcc -o cardtest2 adventurer_test.c -g dominion.o rngs.o $(CFLAGS)
 
+cardtest3: dominion.o sea_hag_test.c
+	gcc -o cardtest3 sea_hag_test.c -g dominion.o rngs.o $(CFLAGS)	
+
+cardtest4: dominion.o minion_test.c
+	gcc -o cardtest4 minion_test.c -g dominion.o rngs.o $(CFLAGS)
 
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
 all: playdom player 
 
+unittestresults.out: cardtest1 cardtest2 cardtest3 cardtest4
+	./cardtest1 >> unittestresults.out
+	./cardtest2 >> unittestresults.out
+	./cardtest3 >> unittestresults.out
+	./cardtest4 >> unittestresults.out
+
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe cardtest1 cardtest2
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe cardtest1 cardtest2 cardtest3 cardtest4
