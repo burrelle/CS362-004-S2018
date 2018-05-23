@@ -52,5 +52,17 @@ unittestresults.out: cardtest1 cardtest2 cardtest3 cardtest4
 	./cardtest3 >> unittestresults.out
 	./cardtest4 >> unittestresults.out
 
+smithy_random.out: dominion.o smithy_random.c
+	gcc -o smithy_random smithy_random.c -g dominion.o rngs.o $(CFLAGS)
+	./smithy_random >> smithy_random.out
+
+adventurer_random.out: dominion.o adventurer_random.c
+	gcc -o adventurer_random adventurer_random.c -g dominion.o rngs.o $(CFLAGS)
+	./adventurer_random >> adventurer_random.out
+
+embargo_random.out: dominion.o embargo_random.c
+	gcc -o embargo_random embargo_random.c -g dominion.o rngs.o $(CFLAGS)
+	./embargo_random >> embargo_random.out
+
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe cardtest1 cardtest2 cardtest3 cardtest4
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe cardtest1 cardtest2 cardtest3 cardtest4 smithy_random adventurer_random embargo_random
