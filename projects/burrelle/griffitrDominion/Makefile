@@ -48,9 +48,13 @@ all: playdom player
 
 unittestresults.out: cardtest1 cardtest2 cardtest3 cardtest4
 	./cardtest1 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
 	./cardtest2 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
 	./cardtest3 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
 	./cardtest4 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
 
 smithy_random.out: dominion.o smithy_random.c
 	gcc -o smithy_random smithy_random.c -g dominion.o rngs.o $(CFLAGS)
