@@ -1,5 +1,7 @@
 import junit.framework.TestCase;
 
+import java.util.Random;
+
 public class VerificationTest extends TestCase{
 
     public VerificationTest(String testName) {
@@ -66,6 +68,65 @@ public class VerificationTest extends TestCase{
         assertFalse(urlVal.isValid("http:/www.localhost.com:1234"));
         assertFalse(urlVal.isValid("http/www.localhost.com/assert"));
         assertTrue(urlVal.isValid("https://www.localhost.com/assert?name=john"));
+    }
+
+    public void testIsValid()
+    {
+        // {scheme} + {site} + {path-optional} + {port-optional}
+        // Valid and Invalid Scheme
+        String[] validScheme = {"http://", "ftp://", "https://", "", "h3t://"};
+        String[] invalidScheme = {"h3t://", "http:/", "http:", "http/", "://"};
+        // Valid and Invalid Site
+        String[] validSite = {"www.google.com", "go.com", "go.au", "0.0.0.0", "255.255.255.255", "255.com"};
+        String[] invalidSite = {"256.256.256.256", "1.2.3.4.5", "1.2.3.4.", "1.2.3", ".1.2.3.4", "go.a", "go.a1a", "go.1aa", "aaa.", ".aaa", "aaa", ""};
+        // Valid and Invalid Port
+        String[] validPort = {":80", ":65535", ":0", ""};
+        String[] invalidPort = {":-1", ":65636", ":65a"};
+        // Valid and Invalid Path
+        String[] validPath = {"/test1", "/t123", "/$23", "/test1/", "", "/test1/file"};
+        String[] invalidPath = {"/..", "/../", "/..//file", "/test1//file"};
+
+        Random random = new Random();
+        UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+        Integer passedTests = 0;
+        Integer failedTests = 0;
+
+        // Valid URL
+        for (int i = 0; i < 100 ; i++) {
+            Integer validSchemeInt = random.nextInt(validScheme.length);
+            Integer validSiteInt = random.nextInt(validSite.length);
+            Integer validPortInt = random.nextInt(validPort.length);
+            Integer validPathInt = random.nextInt(validPath.length);
+
+            String validURL = validScheme[validSchemeInt] + validSite[validSiteInt] + validPort[validPortInt] + validPath[validPathInt];
+            Boolean isURLValid = urlVal.isValid(validURL);
+            if (isURLValid) {
+                passedTests++;
+            }
+            else {
+                failedTests++;
+            }
+        }
+
+        // Invalid URL
+        for (int i = 0; i < 100 ; i++) {
+            Integer invalidSchemeInt = random.nextInt(invalidScheme.length);
+            Integer invalidSiteInt = random.nextInt(invalidSite.length);
+            Integer invalidPortInt = random.nextInt(invalidPort.length);
+            Integer invalidPathInt = random.nextInt(invalidPath.length);
+
+            String invalidURL = invalidScheme[invalidSchemeInt] + invalidSite[invalidSiteInt] + invalidPort[invalidPortInt] + invalidPath[invalidPathInt];
+            Boolean isURLValid = urlVal.isValid(invalidURL);
+            if (!isURLValid) {
+                passedTests++;
+            }
+            else {
+                failedTests++;
+            }
+        }
+
+        System.out.println("Passed Tests: " + passedTests);
+        System.out.println("Failed Tests: " + failedTests);
     }
 }
 
