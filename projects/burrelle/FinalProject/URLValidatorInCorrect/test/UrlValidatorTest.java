@@ -13,37 +13,39 @@ import junit.framework.TestCase;
 public class UrlValidatorTest extends TestCase {
 
 
-   public UrlValidatorTest(String testName) {
-      super(testName);
-   }
+    public UrlValidatorTest(String testName) {
+        super(testName);
+    }
 
-   
-   
-   public void testManualTest()
-   {
-//You can use this function to implement your manual testing	   
-	   
-   }
-   
-   
-   public void testYourFirstPartition()
-   {
-	 //You can use this function to implement your First Partition testing	   
 
-   }
-   
-   public void testYourSecondPartition(){
-		 //You can use this function to implement your Second Partition testing	   
+    public void testManualTest()
+    {
+        //You can use this function to implement your manual testing
+        UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+        assertTrue(urlVal.isValid("http://www.google.com")); // True
+        assertTrue(urlVal.isValid("https://www.bankofamerica.com")); // Returns false but should be true
+        assertTrue(urlVal.isValid("ftp://172.16.254.1:8000")); // Returns false but should be true.
+    }
 
-   }
-   //You need to create more test cases for your Partitions if you need to 
-   
-   public void testIsValid()
-   {
-	   //You can use this function for programming based testing
 
-   }
-   
+    public void testYourFirstPartition()
+    {
+        //You can use this function to implement your First Partition testing
+
+    }
+
+    public void testYourSecondPartition(){
+        //You can use this function to implement your Second Partition testing
+
+    }
+    //You need to create more test cases for your Partitions if you need to
+
+    public void testIsValid()
+    {
+        //You can use this function for programming based testing
+
+    }
+
 
 
 }
